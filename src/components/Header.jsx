@@ -12,9 +12,9 @@ const Header = () => {
   const navigate = useNavigate()
   
   const logoutHandler = async () => {
-    if (session) {
+    
       signOutSupabase()
-    }
+    
   }
 
   return (
