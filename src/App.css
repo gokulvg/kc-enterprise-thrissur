@@ -1,0 +1,13 @@
+.app-body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+}
+#navbar a.active{
+  background-color: aliceblue;
+  box-shadow: 0 0 1.5rem rgb(254, 254, 49);
+  font-weight: 700;
+}
+
