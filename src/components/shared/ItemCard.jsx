@@ -4,6 +4,7 @@ import { useSupeAuthStateChange } from '../hooks/useSupeBaseAuthChange'
 
 const ItemCard = (props) => {
     const {session} = useSupeAuthStateChange()
+    console.log(props)
     // console.log(session)
     // console.log(`${props.imageUrl}`)
     return (

@@ -54,6 +54,12 @@ const router = createBrowserRouter([
       </SecureRoute> 
       },
       {
+        path: "category/:categoryId/product/:productId",      
+        element:<SecureRoute>
+        <SingleProdcut />
+      </SecureRoute> 
+      },
+      {
         path: "about-us",       
         element:<SecureRoute>
         <AboutUs />

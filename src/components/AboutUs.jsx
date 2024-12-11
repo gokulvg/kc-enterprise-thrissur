@@ -4,7 +4,7 @@ import shopImage from "../assets/shoplocation.jpg"
 
 const AboutUs = () => {
   return (
-    <Box className='flex  items-center flex-col gap-6 mt-10'>
+    <Box className='flex  items-center flex-col gap-6 mt-10 bg-slate-50'>
       <Heading size='lg' >About Us</Heading>
       <Box className='grid grid-cols-2 gap-6 items-center' >
         {/* <Box> */}

@@ -1,9 +1,6 @@
 import { Box, Button, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify';
-// import { db, storage } from '../../constants/firebase';
-import { getDownloadURL, uploadBytes, ref } from 'firebase/storage';
-import { addDoc, collection, doc, setDoc, updateDoc } from 'firebase/firestore';
 import SpinnerLoader from './SpinnerLoader';
 import { supabase } from '../../supabase';
 
@@ -31,19 +28,15 @@ useEffect(()=>{
         setIsLoading(true)
         if(isEdit){
             try{
-                console.log("started")
-                const docRef = doc(db,"products",id)
-                console.log(categoryId)
-            //    const editProduct= await setDoc(docRef,{
-            //        categoryId:categoryId,
-            //         name:product.name,
-            //         price:product.price,
-            //         imageUrl:product.imageUrl,
-            //     })
-                console.log(editProduct)
-                toast.success("product data updated")
-                setIsLoading(false)
-                onClose()
+                const {error} = await supabase.from('products').update([{categoryId:categoryId,
+                    name:product.name,
+                    price:product.price,
+                    imageUrl:product.imageUrl,}]).eq('id',id)
+                if(!error){
+                    toast.success("product data updated")
+                    setIsLoading(false)
+                    onClose()
+                }
             }catch(err){
                 toast.error(err)
                 setIsLoading(false)
@@ -53,26 +46,8 @@ useEffect(()=>{
             if (product.name == "" || product.price == "" || !productImage) {
                 toast.error("Please add all the data")
                 return
-            }
-         
-            // const imageRef = ref(storage, `products/${productImage.name}`);
+            }        
     
-            // const uploadProduct = 
-            // uploadBytes(imageRef, productImage).then(data => getDownloadURL(data.ref)).then(async url => {
-            //     const docRef = await addDoc(collection(db, "products"), { ...product, imageUrl: url,categoryId:categoryId })
-            //     console.log("document uploade ", docRef.id);
-            //     toast.success("Product Added")
-            //     setIsLoading(false)
-            //     onClose()
-            //     setProduct({
-            //         name: "",
-            //         price: "",
-            //         imageUrl: ""
-            //     })
-            // }).catch(err => {
-            //     toast.error(err);
-            //     setIsLoading(false)
-            // })
             console.log(productImage)
             const fileName = Date.now().toString();
             const fileExt = productImage.name.split(".").pop();

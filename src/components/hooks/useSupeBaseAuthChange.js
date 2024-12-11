@@ -18,7 +18,7 @@ export const useSupeAuthStateChange = ( ) =>{
         });
         return () => subscription.unsubscribe();
       }, []);
-      	// console.log(session)
+
       return {session}
 }
 
@@ -32,6 +32,5 @@ export const useGetCategoryData = (id ) =>{
     const {data,error} = await supabase.from('category').select('name').eq('id',id)
     setData(data)
   }
-  console.log(categoryData)
   return {categoryData}
 }

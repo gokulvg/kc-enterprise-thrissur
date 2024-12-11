@@ -52,7 +52,7 @@ const Category = () => {
     return (
         <>
 
-            <Box className='flex justify-center items-center flex-col gap-6'>
+            <Box className='flex justify-center items-center flex-col gap-6 bg-slate-50'>
                 <Heading size='lg' >Search by Category</Heading>
 
                 <div className='flex justify-between w-full px-6 items-center '>

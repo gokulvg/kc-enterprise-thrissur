@@ -15,7 +15,7 @@ function App() {
   return (<div className='  bg-slate-50  h-screen'>
     <ToastContainer />
     <Header />
-    <div className='px-5 pb-7'>
+    <div className='px-5 pb-7 h-full bg-slate-50'>
       <Outlet />
     </div>
   </div>)
