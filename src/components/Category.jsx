@@ -2,12 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { AddIcon, Box, Grid, GridItem, Heading, useDisclosure } from "@chakra-ui/icons"
 import ModalComponent from './shared/ModalComponent'
 import ItemCard from './shared/ItemCard'
-import { collection, getDocs, onSnapshot, query } from 'firebase/firestore'
-// import { db } from '../constants/firebase'
 import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { supabase } from '../supabase'
-// import useFirebaseAuthStateChange from './hooks/useFirebaseAuthStateChange'
+import { useSupeAuthStateChange } from './hooks/useSupeBaseAuthChange'
+
 
 const Category = () => {
 
@@ -15,7 +14,7 @@ const Category = () => {
     const [searchData, setSearchData] = useState([])
     const [searchCategory,setSearchCategory] = useState("")
     const { isOpen, onOpen, onClose } = useDisclosure()
-    // const [isLoggedIn, setIsLoggedIn,role] = useFirebaseAuthStateChange()
+    const {session} = useSupeAuthStateChange()
     const navigate = useNavigate()
     const location = useLocation()
     useEffect(() => {
@@ -58,12 +57,12 @@ const Category = () => {
 
                 <div className='flex justify-between w-full px-6 items-center '>
 
-                {/* <Box className={`p-3  w-fit rounded-lg cursor-pointer ${role ==='admin'&& 'bg-slate-300'}  ` }onClick={onOpen}> */}
-                <Box className={`p-3  w-fit rounded-lg cursor-pointer  ` }onClick={onOpen}>
+                <Box className={`p-3  w-fit rounded-lg cursor-pointer ${session?.user?.email ==='gokulvg47@gmail.com'&& 'bg-slate-300'}  ` }onClick={onOpen}>
+         
                     {
-                    // role==="admin" && <> <AddIcon boxSize={5} /> <span className='ml-3'>Add Category</span>
-                    // </>
-                    'Add'
+                    session?.user?.email ==='gokulvg47@gmail.com' && <> <AddIcon boxSize={5} /> <span className='ml-3'>Add Category</span>
+                    </>
+            
                     }
                 </Box>
                 <input type='text' className='px-4 py-5 w-80' value={searchCategory} onChange={(e)=>setSearchCategory(e.target.value)} placeholder='Search by category' />

@@ -40,16 +40,13 @@ const Home = () => {
 }
 
 const WelcomeNote = () => {
-  const logouthandler = ( ) =>{
-    signOutSupabase()
-  }
+
   return <div className='grow  flex items-center justify-center'>
     <div className='m-auto flex gap-8 flex-col'>
       <h2 className='font-sub-heading font-bold text-2xl'>Great value, great service, right at your fingertips.</h2>
       <h2 className='font-sub-heading font-semibold text-xl'>Your one-stop shop for quality household items, delivered right to your doorstep.</h2>
       <h2 className='font-sub-heading font-semibold text-lg'>Modern Funrinture Brands upto 50% disocunt</h2>
-      <Button >Click here to view the collections</Button>
-      <Button onClick={logouthandler}>Logout</Button>
+      <Button >Click here to view the collections</Button>    
     </div>
   </div>
 }
