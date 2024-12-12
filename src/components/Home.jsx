@@ -30,7 +30,8 @@ const Home = () => {
 
  
   return (
-    <div className='grid grid-cols-2 gap-6 '>
+    // <div className='grid grid-cols-2 gap-6 '>
+    <div className='grid grid-cols-1 md:grid-cols-2 gap-6 h-full '>
       <img className='grow' src={landingImage} alt='landingImage' />
       {session ? <WelcomeNote /> : <Login />}
     

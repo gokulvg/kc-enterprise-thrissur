@@ -52,12 +52,12 @@ const Category = () => {
     return (
         <>
 
-            <Box className='flex justify-center items-center flex-col gap-6 bg-slate-50'>
+            <Box className='flex justify-center items-center flex-col gap-6 bg-slate-50 pt-10'>
                 <Heading size='lg' >Search by Category</Heading>
 
-                <div className='flex justify-between w-full px-6 items-center '>
+                <div className='flex flex-col md:flex-row gap-5 justify-between w-full px-6 items-center '>
 
-                <Box className={`p-3  w-fit rounded-lg cursor-pointer ${session?.user?.email ==='gokulvg47@gmail.com'&& 'bg-slate-300'}  ` }onClick={onOpen}>
+                <Box className={`p-3  w-full md:w-fit text-center  rounded-lg cursor-pointer ${session?.user?.email ==='gokulvg47@gmail.com'&& 'bg-slate-300'}  ` }onClick={onOpen}>
          
                     {
                     session?.user?.email ==='gokulvg47@gmail.com' && <> <AddIcon boxSize={5} /> <span className='ml-3'>Add Category</span>
@@ -68,7 +68,7 @@ const Category = () => {
                 <input type='text' className='px-4 py-5 w-80' value={searchCategory} onChange={(e)=>setSearchCategory(e.target.value)} placeholder='Search by category' />
                 </div>
 
-                <Grid templateColumns="repeat(4, 1fr)" gap="6">
+                <Grid  gap="6" className='grid grid-cols-2 md:grid-cols-4 pb-6'>
                     {searchData?.map(data => <ItemCard isEdit={false} key={data.id} name={data.name} id={data.id} imageUrl={data.imageUrl} width='30%' height='30%' onClickHandler={onClickHandler} />)}
                     {searchData?.length==0 &&<>
                         <div className='w-72 h-80 bg-slate-300 rounded-md animate-pulse'></div>

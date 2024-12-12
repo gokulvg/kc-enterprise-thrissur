@@ -6,7 +6,7 @@ const AboutUs = () => {
   return (
     <Box className='flex  items-center flex-col gap-6 mt-10 bg-slate-50 pb-5'>
       <Heading size='lg' >About Us</Heading>
-      <Box className='grid grid-cols-2 gap-6 items-center' >
+      <Box className='grid grid-cols-1 md:grid-cols-2 gap-6 items-center' >
         {/* <Box> */}
           <Image src={shopImage}  />
         {/* </Box> */}

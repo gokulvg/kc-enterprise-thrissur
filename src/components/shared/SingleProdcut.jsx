@@ -14,7 +14,7 @@ const SingleProdcut = () => {
     
   return (
     <Box>
-        <Grid  templateColumns="repeat(2, 1fr)" gap="6">
+        <Grid  className='grid grid-cols-1 md:grid-cols-2 pb-6' gap="6">
             <GridItem>
             <Image src={imageUrl} rounded="md"  />
 

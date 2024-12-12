@@ -56,15 +56,15 @@ const ItemList = () => {
     return (
         <Box className='flex flex-col justify-center items-center gap-5'>
             {categoryData && <Heading size='lg' >{categoryData[0]?.name}</Heading>  }          
-              <div className='flex justify-between w-full px-6 items-center '>
-            <Box className={`p-3  w-fit rounded-lg cursor-pointer ${session?.user?.email ==='gokulvg47@gmail.com'&& 'bg-slate-300'}  ` }onClick={onOpen}>
+              <div className='flex flex-col md:flex-row justify-between w-full gap-5 px-6 items-center '>
+            <Box className={`p-3  w-full md:w-fit  text-center rounded-lg cursor-pointer ${session?.user?.email ==='gokulvg47@gmail.com'&& 'bg-slate-300'}  ` }onClick={onOpen}>
                 {session?.user?.email ==='gokulvg47@gmail.com' && <> <AddIcon boxSize={5} /> <span className='ml-3'>Add Item</span></>}
             </Box>           
             
             <input type='text' className='px-4 py-5 w-80' value={searchItem} onChange={(e)=>setSearchItem(e.target.value)} placeholder='Search by item' />
             </div>
             <Box className='flex justify-center items-center flex-wrap gap-10'>
-            <Grid templateColumns="repeat(4, 1fr)" gap="6">
+            <Grid className='grid grid-cols-2 md:grid-cols-4 pb-6' gap="6">
 
                 {searchData?.map(data=>{
                     return <ItemCard width='25%' height='25%' key = {data.id} imageUrl={data.imageUrl}

@@ -48,7 +48,7 @@ const {data,error} = signInSupabase(usernameRef.current.value,passwordRef.curren
   return (
 
     <div className='grow flex justify-center items-center '>
-      <div className=' py-16'>
+      <div className='md:py-16 '>
       <section className='pb-8'>
       
       <h2 className='font-main-heading-heading font-extrabold text-2xl mb-2 block'>Login</h2>

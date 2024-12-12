@@ -24,17 +24,17 @@ const Header = () => {
       </Heading>
       {
       session && 
-        <nav id='navbar'>
+        <nav id='navbar' className=''>
       <ul className='flex justify-center align-middle gap-20 '>
-        <li className='hover:font-semibold'>
+        <li className='hover:font-semibold hidden md:block'>
           <NavLink to={'home'}   >Home</NavLink>
 
         </li>
-        <li className='hover:font-semibold'>
+        <li className='hover:font-semibold hidden md:block'>
           <NavLink to={'category'}  >Category</NavLink>
 
         </li>
-        <li className='hover:font-semibold'>
+        <li className='hover:font-semibold hidden md:block'>
           <NavLink to={'about-us'} > About Us</NavLink>
         </li>
         <li className='hover:font-semibold'>

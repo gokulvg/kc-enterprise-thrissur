@@ -5,7 +5,7 @@ import AboutUs from './AboutUs'
 
 const Body = () => {
   return (
-    <div>
+    <div >
       <Home/>
       <Category/>
       <AboutUs />
