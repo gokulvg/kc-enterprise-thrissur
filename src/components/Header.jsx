@@ -20,25 +20,25 @@ const Header = () => {
   return (
     <div className='flex justify-between p-8  items-center    z-10'>
       <Heading className='text-2xl font-main-heading cursor-pointer tracking-widest' onClick={() => navigate("/")} >
-      <span className='font-main-heading'>KC</span><span className='text-app-secondary-color font-main-heading'>Enterprises</span>
+      <span className='font-main-heading'>KC </span><span className='text-app-secondary-color font-main-heading'>Enterprises</span>
       </Heading>
       {
       session && 
         <nav id='navbar' className=''>
       <ul className='flex justify-center align-middle gap-20 '>
         <li className='hover:font-semibold hidden md:block'>
-          <NavLink to={'/'}   >Home</NavLink>
+          <NavLink to={'/'}   >HOME</NavLink>
 
         </li>
         <li className='hover:font-semibold hidden md:block'>
-          <NavLink to={'category'}  >Category</NavLink>
+          <NavLink to={'category'}  >CATEGORY</NavLink>
 
         </li>
         <li className='hover:font-semibold hidden md:block'>
-          <NavLink to={'about-us'} > About Us</NavLink>
+          <NavLink to={'about-us'} > ABOUT US</NavLink>
         </li>
         <li className='hover:font-semibold'>
-          <Link onClick={logoutHandler} >{session ? 'Logout' : 'Login'}</Link>
+          <Link onClick={logoutHandler} >{session ? 'LOGOUT' : 'LOGIN'}</Link>
          
         </li>
       </ul>

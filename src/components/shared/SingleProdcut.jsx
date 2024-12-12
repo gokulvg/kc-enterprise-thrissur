@@ -19,7 +19,7 @@ const SingleProdcut = () => {
 
             </GridItem>
             <GridItem className='gap-5' >
-                <Heading size='lg'>Prodct Name: {name}</Heading>
+                <Heading size='lg'>Item Name: {name}</Heading>
                 <br/>
                 <Heading size='lg'>Price: {price}</Heading>
                 <br/>

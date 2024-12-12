@@ -83,30 +83,31 @@ useEffect(()=>{
             <ModalOverlay />
             <ModalContent>
                 <Box position='relative'>
-                    <ModalHeader>{isEdit?'Edit Item':'Add New Item'}</ModalHeader>
+                    <ModalHeader>{isEdit?'EDIT ITEM':'ADD NEW ITEM'}</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
                     {isLoading && <SpinnerLoader />}
                         <form className='flex gap-8 flex-col'>
                             <FormControl isRequired={true}>
-                                <FormLabel>Item Name</FormLabel>
+                                {/* <FormLabel>Item Name</FormLabel> */}
+                                <FormLabel> NAME</FormLabel>
                                 <Input type='text' placeholder='short description' value={product.name} onChange={(e) => setProduct(data => { return { ...data, name: e.target.value } })} />
                             </FormControl>
                             <FormControl isRequired={true}>
-                                <FormLabel>Price</FormLabel>
+                                <FormLabel>PRICE</FormLabel>
                                 <Input type='text' placeholder='Item price' value={product.price} onChange={(e) => setProduct(data => { return { ...data, price: e.target.value } })} />
                             </FormControl>
                             <FormControl isRequired={true}>
-                                <FormLabel>Item Image</FormLabel>
+                                <FormLabel>IMAGE</FormLabel>
                                 <Input type='file' accept='image/png,image/jpeg' className='pb-1' onChange={(e) => setProductImage(e.target.files[0])} />
                             </FormControl>
                         </form>
                     </ModalBody>
                     <ModalFooter>
                         <Button colorScheme='blue' mr={3} type='submit' onClick={onFormSubmitHandler}>
-                            {isEdit?'Update Item':'Add New Item'}
+                            {isEdit?'UPDATE ITEM':'ADD NEW ITEM'}
                         </Button>
-                        <Button variant='ghost' onClick={() => onClose()}>Cancel</Button>
+                        <Button variant='ghost' onClick={() => onClose()}>CANCEL</Button>
                     </ModalFooter>
                 </Box>
             </ModalContent>
