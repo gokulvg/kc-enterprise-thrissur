@@ -27,7 +27,7 @@ const Header = () => {
         <nav id='navbar' className=''>
       <ul className='flex justify-center align-middle gap-20 '>
         <li className='hover:font-semibold hidden md:block'>
-          <NavLink to={'home'}   >Home</NavLink>
+          <NavLink to={'/'}   >Home</NavLink>
 
         </li>
         <li className='hover:font-semibold hidden md:block'>

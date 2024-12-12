@@ -4,9 +4,7 @@ import { useSupeAuthStateChange } from '../hooks/useSupeBaseAuthChange'
 
 const ItemCard = (props) => {
     const {session} = useSupeAuthStateChange()
-    console.log(props)
-    // console.log(session)
-    // console.log(`${props.imageUrl}`)
+
     return (
         <GridItem bg="bg" borderRadius="md" shadow='md'  className='hover:bg-white hover:shadow-xlhover cursor-pointer py-5' onClick={() => props.onClickHandler(props)}>
             {props.imageUrl && <Image src={`${props.imageUrl}`} rounded="md" className='object-cover object-center w-full rounded-lg  h-96 ' />}

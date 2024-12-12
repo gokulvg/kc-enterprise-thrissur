@@ -30,7 +30,7 @@ import { supabase } from '../../supabase';
 
 
 const ModalComponent = (data) => {
-    const { isOpen, onOpen, onClose } = data;
+    const { isOpen, onOpen, onClose,getCategory } = data;
     const [category, setCategory] = useState({
         name: "",
 
@@ -68,7 +68,12 @@ const ModalComponent = (data) => {
             }else{
                 const {data,error} =await supabase.from('category')
                                     .insert([{name:category.name,imageUrl:imageUrl}])
-                setLoading(false)
+                if(!error){
+                    setLoading(false)
+                    toast.success("Category Added")
+                    // getCategory()
+                    onClose()
+                }                    
             }                    
 
         }catch(err){

@@ -33,7 +33,8 @@ const ItemList = () => {
     },[])
 
     const getProducts =async ( ) =>{  
-        const {data,error} = await supabase.from('products').select().eq('categoryId',categoryId);             
+        console.log("first")
+        const {data,error} = await supabase.from('products').select().eq('categoryId',categoryId) .order('id', { ascending: false });             
         if(data){          
             setProducts(data)
             setSearchData(data)
@@ -48,7 +49,7 @@ const ItemList = () => {
 
     const onProductClickHandler = (props ) =>{
         console.log(props)
-        navigate(`product/${props.id}`,{state:{id:props.id,name:props.name,imageUrl:props.imageUrl,price:props.price,catId:categoryId}})
+        navigate(`product/${props.id}`,{state:{id:props.id,name:props.name,imageUrl:props.imageUrl,price:props.price,catId:categoryId,}})
 
     }
 
@@ -80,7 +81,7 @@ const ItemList = () => {
                 </Grid>
             </Box>
 
-            {isOpen && <ModelAddItem isOpen={isOpen} onOpen={onOpen} onClose={onClose} categoryId={categoryId}/>}
+            {isOpen && <ModelAddItem isOpen={isOpen} onOpen={onOpen} onClose={onClose} categoryId={categoryId} getProducts={getProducts}/>}
         </Box>
     )
 }

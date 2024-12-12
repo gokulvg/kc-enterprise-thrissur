@@ -5,7 +5,7 @@ import SpinnerLoader from './SpinnerLoader';
 import { supabase } from '../../supabase';
 
 const ModelAddItem = (data) => {
-    const { isOpen, onOpen, onClose,categoryId ,isEdit,name,price,imageUrl, id} = data;
+    const { isOpen, onOpen, onClose,categoryId ,isEdit,name,price,imageUrl, id, getProducts} = data;
     const [product, setProduct] = useState({
         name: "",
         price: "",
@@ -32,9 +32,10 @@ useEffect(()=>{
                     name:product.name,
                     price:product.price,
                     imageUrl:product.imageUrl,}]).eq('id',id)
-                if(!error){
-                    toast.success("product data updated")
+                if(!error){                    
+                    toast.success("Item data updated")
                     setIsLoading(false)
+                    getProducts()
                     onClose()
                 }
             }catch(err){
@@ -66,7 +67,8 @@ useEffect(()=>{
                     setIsLoading(false);
                     toast.error(err);
                 } else{
-                    toast.success("Product Added")
+                    getProducts()
+                    toast.success("Item Added")
                     setIsLoading(false)
                     onClose()                    
                 }                   
@@ -81,28 +83,28 @@ useEffect(()=>{
             <ModalOverlay />
             <ModalContent>
                 <Box position='relative'>
-                    <ModalHeader>{isEdit?'Edit Product':'Add New Product'}</ModalHeader>
+                    <ModalHeader>{isEdit?'Edit Item':'Add New Item'}</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
                     {isLoading && <SpinnerLoader />}
                         <form className='flex gap-8 flex-col'>
                             <FormControl isRequired={true}>
-                                <FormLabel>Product Name</FormLabel>
+                                <FormLabel>Item Name</FormLabel>
                                 <Input type='text' placeholder='short description' value={product.name} onChange={(e) => setProduct(data => { return { ...data, name: e.target.value } })} />
                             </FormControl>
                             <FormControl isRequired={true}>
                                 <FormLabel>Price</FormLabel>
-                                <Input type='text' placeholder='product price' value={product.price} onChange={(e) => setProduct(data => { return { ...data, price: e.target.value } })} />
+                                <Input type='text' placeholder='Item price' value={product.price} onChange={(e) => setProduct(data => { return { ...data, price: e.target.value } })} />
                             </FormControl>
                             <FormControl isRequired={true}>
-                                <FormLabel>Product Image</FormLabel>
+                                <FormLabel>Item Image</FormLabel>
                                 <Input type='file' accept='image/png,image/jpeg' className='pb-1' onChange={(e) => setProductImage(e.target.files[0])} />
                             </FormControl>
                         </form>
                     </ModalBody>
                     <ModalFooter>
                         <Button colorScheme='blue' mr={3} type='submit' onClick={onFormSubmitHandler}>
-                            {isEdit?'Update':'Add New Product'}
+                            {isEdit?'Update Item':'Add New Item'}
                         </Button>
                         <Button variant='ghost' onClick={() => onClose()}>Cancel</Button>
                     </ModalFooter>

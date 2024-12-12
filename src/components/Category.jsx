@@ -17,22 +17,23 @@ const Category = () => {
     const {session} = useSupeAuthStateChange()
     const navigate = useNavigate()
     const location = useLocation()
-    useEffect(() => {
-        // let unsubscribe;
-        try{
-            const getCategory = async () => {  
-                const {data,error} = await supabase.from('category').select('*');             
-                if(data){
-                    setCategoryData(data)
-                    setSearchData(data)
-                }
-            }
+
+    useEffect(() => {        
+        try{          
             getCategory()
         }catch(err){
             toast.error(err)
         }
         // return ( ) =>unsubscribe()
     }, [])
+
+    const getCategory = async () => {  
+        const {data,error} = await supabase.from('category').select('*') .order('id', { ascending: false });             
+        if(data){
+            setCategoryData(data)
+            setSearchData(data)
+        }
+    }
 
    useEffect(()=>{  
         const data =  categoryData?.filter(data=>data?.name?.toLowerCase().includes(searchCategory.toLocaleLowerCase()))    
@@ -80,7 +81,7 @@ const Category = () => {
 
                 </Grid>
             </Box >
-            {isOpen && <ModalComponent isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
+            {isOpen && <ModalComponent isOpen={isOpen} onOpen={onOpen} onClose={onClose} getCategory={getCategory} />
             }
         </>
     )

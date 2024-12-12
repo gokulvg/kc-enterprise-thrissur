@@ -8,7 +8,6 @@ const SingleProdcut = () => {
     const {state} = useLocation()
     const {categoryId,productId} = useParams()
     const productData = useGetProductData(productId)
-    console.log(productData)
     const {id,name,price,imageUrl,catId}=state
     const { isOpen, onOpen, onClose } = useDisclosure()
     
@@ -30,7 +29,7 @@ const SingleProdcut = () => {
             </GridItem>
         </Grid>
         {isOpen && <ModelAddItem isOpen={isOpen} onOpen={onOpen} onClose={onClose}
-         isEdit={true} name={name} price={price} imageUrl={imageUrl} id={id} categoryId={catId}/>}
+         isEdit={true} name={name} price={price} imageUrl={imageUrl} id={id} categoryId={catId} />}
     </Box>
   )
 }
