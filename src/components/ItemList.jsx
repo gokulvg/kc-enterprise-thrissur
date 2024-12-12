@@ -58,8 +58,8 @@ const ItemList = () => {
         <Box className='flex flex-col justify-center items-center gap-5'>
             {categoryData && <Heading size='lg' >{categoryData[0]?.name}</Heading>  }          
               <div className='flex flex-col md:flex-row justify-between w-full gap-5 px-6 items-center '>
-            <Box className={`p-3  w-full md:w-fit  text-center rounded-lg cursor-pointer ${session?.user?.email ===('gokulvg47@gmail.com' || 'kcenterprisestcr@gmail.com')&& 'bg-slate-300'}  ` }onClick={onOpen}>
-                {session?.user?.email ===('gokulvg47@gmail.com' || 'kcenterprisestcr@gmail.com') && <> <AddIcon boxSize={5} /> <span className='ml-3'>Add Item</span></>}
+            <Box className={`p-3  w-full md:w-fit  text-center rounded-lg cursor-pointer ${session?.user?.email ===('kcenterprisestcr@gmail.com')&& 'bg-slate-300'}  ` }onClick={onOpen}>
+                {session?.user?.email ===('kcenterprisestcr@gmail.com') && <> <AddIcon boxSize={5} /> <span className='ml-3'>Add Item</span></>}
             </Box>           
             
             <input type='text' className='px-4 py-5 w-80' value={searchItem} onChange={(e)=>setSearchItem(e.target.value)} placeholder='Search by item' />
