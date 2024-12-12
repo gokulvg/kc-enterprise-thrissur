@@ -58,10 +58,10 @@ const Category = () => {
 
                 <div className='flex flex-col md:flex-row gap-5 justify-between w-full px-6 items-center '>
 
-                <Box className={`p-3  w-full md:w-fit text-center  rounded-lg cursor-pointer ${session?.user?.email ==='gokulvg47@gmail.com'&& 'bg-slate-300'}  ` }onClick={onOpen}>
+                <Box className={`p-3  w-full md:w-fit text-center  rounded-lg cursor-pointer ${session?.user?.email ===('gokulvg47@gmail.com'|| 'kcenterprisestcr@gmail.com' )&& 'bg-slate-300'}  ` }onClick={onOpen}>
          
                     {
-                    session?.user?.email ==='gokulvg47@gmail.com' && <> <AddIcon boxSize={5} /> <span className='ml-3'>Add Category</span>
+                    session?.user?.email ===('gokulvg47@gmail.com' || 'kcenterprisestcr@gmail.com' )&& <> <AddIcon boxSize={5} /> <span className='ml-3'>Add Category</span>
                     </>
             
                     }
