@@ -6,6 +6,8 @@ import { signinWithFirebase } from '../constants/firebase'
 import { useUserRole } from './hooks/useFirebaseAuthStateChange'
 import { supabase } from '../supabase'
 import { signInSupabase } from '../supabaseAPI'
+import { useSupeAuthStateChange } from './hooks/useSupeBaseAuthChange'
+import { toast } from 'react-toastify'
 // import { useSupeAuthStateChange } from './hooks/useSupeBaseAuthChange'
 
 const Login = () => {
@@ -13,7 +15,7 @@ const Login = () => {
     username:false,
     password:false
   })
-
+  const {session} = useSupeAuthStateChange()
   const usernameRef = useRef();
   const passwordRef = useRef()
 
@@ -40,13 +42,11 @@ const Login = () => {
         return
       }
     
-const {data,error} = signInSupabase(usernameRef.current.value,passwordRef.current.value)
-if(error){
-  setCredErrorState((prevData)=>({
-    username:true,password:true,
-
-  }))
-}
+const {data,error} = await signInSupabase(usernameRef.current.value,passwordRef.current.value)
+console.log(error)
+      if(error){
+        toast.error(error.message)
+      }
 
   }
   return (

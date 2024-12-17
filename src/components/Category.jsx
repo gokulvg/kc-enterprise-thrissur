@@ -6,6 +6,7 @@ import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { supabase } from '../supabase'
 import { useSupeAuthStateChange } from './hooks/useSupeBaseAuthChange'
+import Footer from './Footer'
 
 
 const Category = () => {
@@ -102,6 +103,7 @@ const Category = () => {
             </Box >
             {isOpen && <ModalComponent isOpen={isOpen} onOpen={onOpen} onClose={onClose} getCategory={getCategory} />
             }
+            
         </>
     )
 }
