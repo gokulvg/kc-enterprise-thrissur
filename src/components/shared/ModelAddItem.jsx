@@ -1,25 +1,31 @@
-import { Box, Button, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay } from '@chakra-ui/react'
+import { Box, Button, ButtonGroup, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify';
 import SpinnerLoader from './SpinnerLoader';
 import { supabase } from '../../supabase';
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { useLocation, useNavigate } from 'react-router-dom';
 
-const ModelAddItem = (data) => {
-    const { isOpen, onOpen, onClose,categoryId ,isEdit,name,price,imageUrl, id, getProducts} = data;
+const ModelAddItem = (itemData) => {
+    const { isOpen, onOpen, onClose,categoryId ,isEdit,name,price,imageUrl, id, getProducts,size} = itemData;
     const [product, setProduct] = useState({
         name: "",
         price: "",
+        size:"",
         imageUrl: ""
     })
     const [productImage, setProductImage] = useState();
     const [isLoading, setIsLoading] = useState(false)
-    
-useEffect(()=>{
+    const location = useLocation()
+    const navigate = useNavigate();
+    useEffect(()=>{    
     setProduct({
         name:name || "",
         price:price || "",
+        size:size || "",
         imageUrl:imageUrl || ""
-    })   
+    })  
+    
 },[])
     
 
@@ -31,6 +37,7 @@ useEffect(()=>{
                 const {error} = await supabase.from('products').update([{categoryId:categoryId,
                     name:product.name,
                     price:product.price,
+                    size:product.size,
                     imageUrl:product.imageUrl,}]).eq('id',id)
                 if(!error){                    
                     toast.success("Item data updated")
@@ -44,14 +51,18 @@ useEffect(()=>{
                 onClose()
             }
         }else{
-            if (product.name == "" || product.price == "" || !productImage) {
+            if (product.name == "" || product.price == "" || product.size == "" || !productImage) {
                 toast.error("Please add all the data")
+                setIsLoading(false);
                 return
             }        
     
             console.log(productImage)
             const fileName = Date.now().toString();
             const fileExt = productImage.name.split(".").pop();
+            try{
+
+            
             const {data,error} = await supabase.storage.from('products')
                                     .upload(`${fileName}`,productImage,{contentType:productImage.type,upsert:false})            
             const imageUrl = `https://mrnoghoibmzdqtlhtwkk.supabase.co/storage/v1/object/public/${data?.fullPath}`
@@ -71,11 +82,36 @@ useEffect(()=>{
                     toast.success("Item Added")
                     setIsLoading(false)
                     onClose()                    
-                }                   
-            }                     
+                }                  
+            } 
+        }catch(err){
+            setIsLoading(false);
+            toast.error(err);
+        }  
+        }        
+    }
 
-        }
-        // console.log(imageRef)
+    const onDeleteItemHandler = async( ) =>{         
+        const splittedData = itemData.imageUrl.split("/");
+        const ImageId =  splittedData[splittedData.length-1];
+        console.log(ImageId)
+        setIsLoading(true)
+        try{
+            const response = await supabase.from('products').delete().eq('id',id);        
+            if(response){          
+                const { data, error } = await supabase
+                .storage
+                .from('products')
+                .remove([`folder/${ImageId}`])
+                toast.success("Item Deleted")                        
+                setIsLoading(false)
+                navigate(-1)
+
+            }
+        }catch(err){
+            toast.error(err)
+            setIsLoading(false)
+        }           
 
     }
     return (
@@ -98,16 +134,28 @@ useEffect(()=>{
                                 <Input type='text' placeholder='Item price' value={product.price} onChange={(e) => setProduct(data => { return { ...data, price: e.target.value } })} />
                             </FormControl>
                             <FormControl isRequired={true}>
+                                <FormLabel>SIZE</FormLabel>
+                                <Input type='text' placeholder='Item size' value={product.size} onChange={(e) => setProduct(data => { return { ...data, size: e.target.value } })} />
+                            </FormControl>
+                            <FormControl isRequired={true}>
                                 <FormLabel>IMAGE</FormLabel>
                                 <Input type='file' accept='image/png,image/jpeg' className='pb-1' onChange={(e) => setProductImage(e.target.files[0])} />
                             </FormControl>
                         </form>
                     </ModalBody>
-                    <ModalFooter>
+                    <ModalFooter className='flex  justify-between'>   
+
+                        <Button  mr={28} colorScheme='red' variant='solid' onClick={onDeleteItemHandler}>
+                            <RiDeleteBin6Line />
+                        </Button>
+
+                        <ButtonGroup>
+
                         <Button colorScheme='blue' mr={3} type='submit' onClick={onFormSubmitHandler}>
                             {isEdit?'UPDATE ITEM':'ADD NEW ITEM'}
                         </Button>
                         <Button variant='ghost' onClick={() => onClose()}>CANCEL</Button>
+                        </ButtonGroup>
                     </ModalFooter>
                 </Box>
             </ModalContent>

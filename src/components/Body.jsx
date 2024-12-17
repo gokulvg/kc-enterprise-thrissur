@@ -2,13 +2,17 @@ import React from 'react'
 import Home from './Home'
 import Category from './Category'
 import AboutUs from './AboutUs'
+import Footer from './Footer'
 
 const Body = () => {
   return (
-    <div >
+    <div className='bg-slate-50 pt-10' >
       <Home/>
-      <Category/>
+      <div id='collection'>
+      <Category></Category>
+      </div>
       <AboutUs />
+      <Footer></Footer>
     </div>
   )
 }

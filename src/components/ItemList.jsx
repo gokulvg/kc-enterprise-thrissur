@@ -35,7 +35,16 @@ const ItemList = () => {
     const getProducts =async ( ) =>{  
         console.log("first")
         const {data,error} = await supabase.from('products').select().eq('categoryId',categoryId) .order('id', { ascending: false });             
-        if(data){          
+        if(data){   
+            data.sort((a,b)=>{
+                if(a.name < b.name){
+                    return -1
+                }
+                if(a.name > b.name){
+                    return 1
+                }
+                return 0
+            });       
             setProducts(data)
             setSearchData(data)
         }
@@ -43,13 +52,25 @@ const ItemList = () => {
 
     useEffect(()=>{  
         const data =  products?.filter(data=>data?.name?.toLowerCase().includes(searchItem.toLocaleLowerCase()))    
-        setSearchData(data)  
+        if(data){
+            data.sort((a,b)=>{
+                if(a.name < b.name){
+                    return -1
+                }
+                if(a.name > b.name){
+                    return 1
+                }
+                return 0
+            });
+            setSearchData(data)  
+        }
    },[searchItem])
 
 
     const onProductClickHandler = (props ) =>{
         console.log(props)
-        navigate(`product/${props.id}`,{state:{id:props.id,name:props.name,imageUrl:props.imageUrl,price:props.price,catId:categoryId,}})
+        navigate(`product/${props.id}`,{state:{id:props.id,name:props.name,
+            imageUrl:props.imageUrl,price:props.price,catId:categoryId,size:props?.size}})
 
     }
 
@@ -58,8 +79,10 @@ const ItemList = () => {
         <Box className='flex flex-col justify-center items-center gap-5'>
             {categoryData && <Heading size='lg' >{categoryData[0]?.name}</Heading>  }          
               <div className='flex flex-col md:flex-row justify-between w-full gap-5 px-6 items-center '>
-            <Box className={`p-3  w-full md:w-fit  text-center rounded-lg cursor-pointer ${session?.user?.email ===('kcenterprisestcr@gmail.com')&& 'bg-slate-300'}  ` }onClick={onOpen}>
-                {session?.user?.email ===('kcenterprisestcr@gmail.com') && <> <AddIcon boxSize={5} /> <span className='ml-3'>Add Item</span></>}
+            <Box className={`p-3  w-full md:w-fit  text-center rounded-lg cursor-pointer ${(session?.user?.email ===('kcenterprisestcr@gmail.com') || session?.user?.email ===('gokulvg47@gmail.com'))&& 'bg-slate-300'}  ` }onClick={onOpen}>
+                {(session?.user?.email ===('kcenterprisestcr@gmail.com') ||
+                session?.user?.email ===('gokulvg47@gmail.com'))                
+                && <> <AddIcon boxSize={5} /> <span className='ml-3'>Add Item</span></>}
             </Box>           
             
             <input type='text' className='px-4 py-5 w-80' value={searchItem} onChange={(e)=>setSearchItem(e.target.value)} placeholder='Search by item' />
@@ -69,7 +92,7 @@ const ItemList = () => {
 
                 {searchData?.map(data=>{
                     return <ItemCard width='25%' height='25%' key = {data.id} imageUrl={data.imageUrl}
-                    id={data.id} categoryId={data.categoryId} name={data.name} price={data.price} onClickHandler={onProductClickHandler}/>
+                    id={data.id} categoryId={data.categoryId} name={data.name} price={data.price} size={data?.size} onClickHandler={onProductClickHandler}/>
                 })}
                    {searchData?.length==0 &&<>
                         <div className='w-72 h-80 bg-slate-300 rounded-md animate-pulse'></div>

@@ -10,4 +10,9 @@
   box-shadow: 0 0 1.5rem rgb(254, 254, 49);
   font-weight: 700;
 }
+input::file-selector-button {
+  border: thin solid grey;
+  border-radius: 3px;
+  margin-top: 6px;
+}
 

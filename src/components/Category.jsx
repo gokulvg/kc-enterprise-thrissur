@@ -23,13 +23,21 @@ const Category = () => {
             getCategory()
         }catch(err){
             toast.error(err)
-        }
-        // return ( ) =>unsubscribe()
+        }  
     }, [])
 
     const getCategory = async () => {  
         const {data,error} = await supabase.from('category').select('*') .order('id', { ascending: false });             
         if(data){
+            data.sort((a,b)=>{
+                if(a.name < b.name){
+                    return -1
+                }
+                if(a.name > b.name){
+                    return 1
+                }
+                return 0
+            });
             setCategoryData(data)
             setSearchData(data)
         }
@@ -37,7 +45,18 @@ const Category = () => {
 
    useEffect(()=>{  
         const data =  categoryData?.filter(data=>data?.name?.toLowerCase().includes(searchCategory.toLocaleLowerCase()))    
-        setSearchData(data)  
+        if(data){
+            data.sort((a,b)=>{
+                if(a.name < b.name){
+                    return -1
+                }
+                if(a.name > b.name){
+                    return 1
+                }
+                return 0
+            });           
+            setSearchData(data)  
+        }
    },[searchCategory])
 
     const onClickHandler = (props) => {      

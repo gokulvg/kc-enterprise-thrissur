@@ -41,8 +41,12 @@ const Login = () => {
       }
     
 const {data,error} = signInSupabase(usernameRef.current.value,passwordRef.current.value)
-// console.log(data)
-// console.log(error)
+if(error){
+  setCredErrorState((prevData)=>({
+    username:true,password:true,
+
+  }))
+}
 
   }
   return (
