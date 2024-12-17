@@ -3,8 +3,8 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <Box className='bg-app-text-color grid grid-rows-2 items-center py-3 hidden md:block gap-3'>
-      <Box className='grid grid-cols-2'>
+    <Box className='bg-app-text-color grid grid-rows-2 items-center py-3  gap-3'>
+      <Box className='grid grid-cols-1 md:grid-cols-2'>
 
       <Box className='m-auto'>
         <Heading ><span className='font-main-heading'>KC </span><span className='text-white font-main-heading'>Enterprises</span></Heading>
@@ -28,7 +28,7 @@ const Footer = () => {
           <span >Corporate Purchasing :</span><span>kcenterprisestcr@gmail.com</span>
           </div>
         </Box>
-        <Box>
+        <Box className='hidden md:block'>
         <div className='text-sm/[15px]'>Ordering + Information</div>
         <div>
           <span className='text-sm/[14px]'>Shipping Informations</span>
