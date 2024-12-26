@@ -4,7 +4,7 @@ import { IoLogoWhatsapp } from "react-icons/io";
 
 const Footer = () => {
   return (
-    <Box className='bg-app-text-color grid grid-rows-2 items-center py-3  gap-3'>
+    <Box className='bg-app-text-color grid grid-rows-2 items-center py-3  gap-3 px-3'>
       <Box className='grid grid-cols-1 md:grid-cols-2 justify-between'>
 
       <Box className='m-auto'>
