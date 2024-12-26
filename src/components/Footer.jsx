@@ -1,5 +1,6 @@
 import { Box, Heading } from '@chakra-ui/react'
 import React from 'react'
+import { IoLogoWhatsapp } from "react-icons/io";
 
 const Footer = () => {
   return (
@@ -11,16 +12,16 @@ const Footer = () => {
       </Box>
       <Box className='flex gap-3'>
         <Box className='flex flex-col gap-2 justify-start '>
-          <div className='text-sm/[15px] flex-col'>Contact US</div>
+          <div className='text-sm/[15px] flex-col'>Contact Us</div>
           <div className='text-sm/[14px]'>
           <span>Email :</span><span>kcenterprisestcr@gmail.com</span>
           </div>
           <div className='text-sm/[14px]'>
-          <span>Phone :</span><span>9846232422</span>
+          <span>Phone :</span><span> <IoLogoWhatsapp size={15} className='inline' /> 9846232422</span>
 
           </div>
           <div className='text-sm/[14px]'>
-          <span>Phone :</span><span>7012063553</span>
+          <span>Phone :</span><span> <IoLogoWhatsapp size={15} className='inline'/> 7012063553</span>
 
           </div>
           <div className='text-sm/[14px]'>

@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { useLocation, useParams } from 'react-router-dom'
 import ModelAddItem from './ModelAddItem'
 import { useGetProductData } from '../hooks/useGetData'
+import { useSupeAuthStateChange } from '../hooks/useSupeBaseAuthChange'
 
 const SingleProdcut = () => {
     const {state} = useLocation()
@@ -11,6 +12,7 @@ const SingleProdcut = () => {
     const {id,name,price,size,imageUrl,catId}=state
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [zoomedImage, setZoomedImage] = useState(null);
+    const {session} = useSupeAuthStateChange()
 
     const openZoomedImage = (imageUrl) => {
       setZoomedImage(imageUrl);
@@ -36,7 +38,8 @@ console.log(size)
                 <br/>
                 <br/>
                 <br/>
-                <Button onClick={onOpen}>Edit</Button>
+                {(session?.user?.email ===('kcenterprisestcr@gmail.com') ||
+                session?.user?.email ===('gokulvg47@gmail.com')) && <Button onClick={onOpen}>Edit</Button>}
             </GridItem>
         </Grid>
         {isOpen && <ModelAddItem isOpen={isOpen} onOpen={onOpen} onClose={onClose}
